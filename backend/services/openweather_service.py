@@ -1,5 +1,7 @@
 from typing import Optional
 
+import requests
+
 api_key: Optional[str] = None
 
 
@@ -9,11 +11,20 @@ def get_report(
     country: Optional[str],
     units: Optional[str],
 ) -> dict:
-    q = f"{city},{country}"
+    if state:
+        q = f"{city},{state},{country}"
+    else:
+        q = f"{city},{country}"
     url = (
         "https://api.openweathermap.org/data/2.5/weather?"
         f"q={q}&"
         f"appid={api_key}&"
         f"units={units}"
     )
-    return {"url": url}
+
+    response = requests.get(url)
+    response.raise_for_status()
+
+    data = response.json()
+    forecast = data.get("main", {})
+    return forecast
