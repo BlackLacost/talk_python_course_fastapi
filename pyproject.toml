@@ -11,6 +11,7 @@ uvicorn = {extras = ["statndard"], version = "^0.14.0"}
 Jinja2 = "^3.0.1"
 aiofiles = "^0.7.0"
 requests = "^2.25.1"
+httpx = "^0.18.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

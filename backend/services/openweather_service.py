@@ -1,11 +1,11 @@
 from typing import Optional
 
-import requests
+import httpx
 
 api_key: Optional[str] = None
 
 
-def get_report(
+async def get_report(
     city: str,
     state: Optional[str],
     country: Optional[str],
@@ -22,8 +22,9 @@ def get_report(
         f"units={units}"
     )
 
-    response = requests.get(url)
-    response.raise_for_status()
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+        response.raise_for_status()
 
     data = response.json()
     forecast = data.get("main", {})

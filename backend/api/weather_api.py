@@ -9,9 +9,9 @@ router = APIRouter()
 
 
 @router.get("/api/weather/{city}")
-def weather(
+async def weather(
     loc: Location = Depends(),
     units: Optional[str] = "metric",
 ):
-    report = get_report(loc.city, loc.state, loc.counter, units)
+    report = await get_report(loc.city, loc.state, loc.counter, units)
     return report
