@@ -6,4 +6,4 @@ from pydantic import BaseModel
 class Location(BaseModel):
     city: str
     state: Optional[str] = None
-    counter: str = "US"
+    country: str = "US"
