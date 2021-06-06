@@ -1,8 +1,9 @@
 from typing import Optional
 
-from tools import weather_cache
-
 import httpx
+from fastapi import HTTPException
+
+from tools import weather_cache
 
 api_key: Optional[str] = None
 
@@ -29,7 +30,10 @@ async def get_report(
 
     async with httpx.AsyncClient() as client:
         response = await client.get(url)
-        response.raise_for_status()
+        if response.status_code != 200:
+            raise HTTPException(
+                status_code=response.status_code, detail=response.json()
+            )
 
     data = response.json()
     forecast = data.get("main", {})

@@ -1,5 +1,3 @@
-from typing import Optional
-
 from fastapi import APIRouter, Depends
 
 from models.location import Location
@@ -9,9 +7,6 @@ router = APIRouter()
 
 
 @router.get("/api/weather/{city}")
-async def weather(
-    loc: Location = Depends(),
-    units: str = "metric",
-):
-    report = await get_report(loc.city, loc.state, loc.country, units)
+async def weather(loc: Location = Depends()):
+    report = await get_report(loc.city, loc.state, loc.country, loc.units)
     return report
