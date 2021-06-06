@@ -8,6 +8,7 @@ authors = ["Ilya Lisin <blacklacost@gmail.com>"]
 python = "^3.9"
 fastapi = "^0.65.1"
 uvicorn = {extras = ["statndard"], version = "^0.14.0"}
+Jinja2 = "^3.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
